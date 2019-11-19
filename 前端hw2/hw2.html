@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 引用思源黑體字形 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/hw2.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+    <title>啟宏的籃球專賣店</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <i class="fas fa-basketball-ball" style="color:white;"></i><a class="navbar-brand" href="#">啟宏的籃球店</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">新品 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">熱銷</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        分類
+                      </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">室內籃球</a>
+                        <a class="dropdown-item" href="#">室外籃球</a>
+
+                        <a class="dropdown-item" href="#">街頭籃球</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#"></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
+            </form>
+        </div>
+    </nav>
+    <br/><br/><br/>
+    <div class="container">
+        <h2 style="text-align:center">主打產品</h2>
+        <p style="text-align:center">我們只賣籃球，以下是我們的TOP5</p>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>產品名稱</th>
+                    <th>產品圖案</th>
+                    <th>產品售價</th>
+                    <th>產品編號</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>NBA 塗鴉</td>
+                    <td><img class="basketball" src="./img/draw.png" alt="NBA 塗鴉"></td>
+                    <td>$1500</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Lebron</td>
+                    <td><img class="basketball" src="./img/lebron.png" alt="Lebron"></td>
+                    <td>$1000</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>NIKE</td>
+                    <td><img class="basketball" src="./img/nike.png" alt="NIKE"></td>
+                    <td>$1200</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>紅色的球</td>
+                    <td><img class="basketball" src="./img/red.png" alt="red"></td>
+                    <td>$800</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>藍色的球</td>
+                    <td><img class="basketball" src="./img/blue.png" alt="blue"></td>
+                    <td>$700</td>
+                    <td>5</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
