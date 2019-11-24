@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chi-Hung, Chuang's personal page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Chi-Hung, Chuang</a>
+            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+              </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top:120px;">
+        <h2 style="font-weight=bold; color: rgb(209, 151, 26);">Recommender system</h2>
+        <p>
+            在零售領域中：當某個消費者買了若干品項並結帳，一個零售商能否根據歷史交易記錄猜測，推薦哪個商品給消費者會得到最高的購買機率？
+            <br><br>讓我們具體地描述這個問題。假設我們有在銷售的品項（item）集合為 I = {1,2,...,n}，
+            <br>而歷史上發生過的交易（transaction）集合為 T = {1,2,...,m}。
+            <br>在交易 j 中，某消費者買了 T (j) ⊂ I，亦即他從品項集合 I 中挑了一些東西買，
+            <br>這些東西的集合 T (j) 是 I 的子集合\footnote{理論上，T (j) 是有可能等於 I，
+            <br>但這表示此消費者買了店裡所有的商品。由於這未免太不切實際，讓我們假設 T (j) 不會等於 I。
+            <br>為了簡單起見，讓我們假設每個品項都最多被買一個。
+            <br>現在一個新的消費者買了品項集合 S ⊂ I 並且結帳了，
+            <br>我們想要在他付錢閃人之前（或是在網站上按下「結帳」之前），
+            <br>從他沒有買的品項集合 I ∖ S 中挑一個商品推薦給他，
+            <br>而我們的任務是在 I ∖ S 中找出他購買機率最大的那個商品。
+            <br><br>
+            <br>讓我們來舉個例子。假設我的店裡賣五種 A、B、C、D、E
+            <br>開店至今一共有 10 個人來買過，交易記錄如下表所示，
+            <br>也就是第一個人買了 D 和 E、第二個人買了 A 和 C 和 D，依此類推。
+            <br>若是用我們剛剛定義的參數來描述，我們有 n = 5、m = 10、I = {A,B,C,D,E}、
+            <br>T (1) = {D,E}、T (2) = {A,C,D}，依此類推。
+
+            <br>
+            <br>
+            <img src="images/p2-1.png" class="img-fluid" alt="Responsive image">
+            <br>
+            <br> 所謂的「購買機率最大」，需要考慮幾件事。
+            <br>
+            <br> 首先，我們會考慮消費者一起購買某些商品的機率，畢竟如果某人已經買了義美牛奶，你應該不想要推薦他林鳳營牛奶，應該會想推薦他麵包（如果他沒有買麵包）。
+            <br>給定任何一個品項集合（itemset）S，我們可以計算其出現過的次數 f(S)，再除以總交易數 m，就是該品項一起被購買的機率，在關聯性分析的領域中我們將之稱為 support（支持度）。
+            <br>
+            <br>舉例來說，我們有 f (C) = 4、f (D) = 9、f ( {C,D} ) = 4，以及 f ( {C,D,E} ) = 1，因此他們各自的 support 就是 supp (C) = 0.4、supp ( {C,D,E} ) = 0.1，依此類推。
+            <br>
+            <br>我們另外也要考慮已知消費者購買一些商品後，也購買另一些商品的條件機率。以我們的例子來說，買了 C 的人也買 D 的機率是 100 \ %，但買了 D 的人也買 C 的機率只有 44.4 \ %，因此對買 C 的人推薦 D 成功率較高，對買 D 的人推薦 C 成功率就比較低了。給定前提品項集合（antecedent itemset）X 跟結果品項集合（consequent itemset）Y，我們用 f (Y | X) 表示買 X 的人也買 Y 的次數，再除以有購買
+            X 的交易次數 f (X)，就得到被稱為 confidence（信賴度）的條件機率 conf (Y | X)。在我們的例子中，conf (D | C)=1、conf (C | D)=49，以及 conf (D | {C,E} )=1。
+            <br><br>
+
+            <br>有了 support 和 confidence 的觀念後，要根據某消費者的購買品項集合 S 來做推薦，就不是那麼沒有頭緒了。為了簡單起見，讓我們假設我們只想推銷一個單品（而不是一個集合），
+            <br>那麼我們要做的就是兩件事：
+            <br><br>
+
+            <br>1. 對一個在集合 I ∖ S 中的商品 i，計算其與 S 一起被購買的 support supp ( {i} ∪ S )。根據一個給定的目標值 s，如果 supp ( {i} ∪ S ) ≥ s 就保留 i，反之則不考慮推薦 i。
+            <br>2. 對於通過第一步驟篩選的品項，一一考慮購買 S 後也購買該品項的機率，也就是 conf ( i | S )，然後挑出 confidence 最大的那個品項做推薦。
+            <br><br>
+
+            <br>請想想我們為什麼要同時考慮 support 和 confidence。考慮 confidence 是直觀的：
+            <br>如果某人買了 S，而且以往有一堆買了 S 的人也買 i，那推薦他買 i 的成功率自然不低。
+            <br>但於此同時 S 和 i 的 support 也是需要注意的。如果 support 太低，那麼這個高 confidence 很可能就是個巧合，只有在某個組合有高 support 的情況下，我們才真的相信它們的 confidence 是有用的。
+            <br>
+            <br>你將會被給定品項與歷史交易資訊。接著你會被給定一筆交易中購買的品項集合，以及 support 必須夠高的門檻值。根據上述規則，找出應該推薦的品項。
+            <br>如果有複數個品項都通過 support 的要求並且同樣有最高的 confidence，就推薦編號最小的那個。
+            <br>如果沒有任何品項可以推薦（因為都不滿足 support 門檻），就不要推薦任何東西。
+            <br>
+            <br>
+            <br>
+            <br>在我們即將實作的陣列中，我們有 m 列，一列代表一次交易，在一列中將儲存該次交易中被購買的品項的編號。因為兩次交易中購買的品項數未必相同，所以我們的每一列都會是一個一維動態陣列，長度恰好為該次交易被購買的品項數。換言之，我們的「表格」將會「各列長度不一」。
+            <br>
+            <br>
+            <h3>Input :</h3>
+            <br>第一列存放兩個整數 n、m 和一個三位小數 s，分別代表總品項數、總交易數和 support 門檻。
+            <br>品項編號為 1、2、3 一直到 n，而交易編號為 1、2、3 一直到 m。
+            <br>在第二列至第 m + 1 列中，第 j + 1 列存放 k (j) + 1 個介於 1 到 n 的不重複整數，
+            <br>其中第一個數字 k (j) 代表歷史上第 j 筆交易所購買的品項數，
+            <br>後面 k (j) 個數字則是品項集合 T (j − 1) 中的品項編號。
+            <br>第 m + 2 列中也有 k(m + 1) + 1 個介於 1 到 n 的不重複整數，
+            <br>代表現在要被推薦的消費者購買的品項數以及品項集合 S 中的品項編號。
+            <br>每一列中的兩個數字都用一個空白鍵隔開。
+            <br>
+            <br><br>
+            <h3>Output :</h3>
+            <br>根據規則找出應該推薦的品項後，請依序輸出該品項的編號、該品項與 S 共同出現的交易次數
+            <br>（亦即support 乘以 m），以及 S 出現的交易次數（亦即給定 S 會購買該品項的 confidence 的分母）。
+            <br>各數字用一個逗點隔開。
+            <br>如果沒有任何品項可以推薦（因為都不滿足 support 門檻），就不要印出任何東西。
+            <br>
+            <br>
+            <br>
+            <h3>Sample Input :</h3>
+            <br>5 &nbsp;10&nbsp; 0.100
+            <br>2 &nbsp;4&nbsp; 5
+            <br>3 &nbsp;1 &nbsp;3&nbsp; 4
+            <br>2 &nbsp;1&nbsp; 4
+            <br>2 &nbsp;1&nbsp; 4
+            <br>2 &nbsp;4&nbsp; 5
+            <br>3 &nbsp;2 &nbsp;3&nbsp; 4
+            <br>3 &nbsp;1 &nbsp;2&nbsp; 5
+            <br>3 &nbsp;3 &nbsp;4&nbsp; 5
+            <br>2 &nbsp;3&nbsp; 4
+            <br>1 &nbsp;4
+            <br>
+            <br>
+            <br>
+            <h3>Sample Output :</h3>
+            <br>1 , 4 , 9
+            <br>
+            <br>
+            <br>
+            <h3>C++ code :</h3>
+            <pre style="color :white;">
+                            #include < iostream >
+                            using namespace std;
+                            void setTransactions(int**&, int*&, int);
+                            void releaseMemory(int** neighbors, int* degrees, int m);
+                            void InsertionSort(int *arr, int size){
+                                for (int i = 1; i < size; i++) {
+                                    int key = arr[i];
+                                    int j = i - 1;
+                                    while (key < arr[j] && j >= 0) {
+                                        arr[j+1] = arr[j];
+                                        j--;
+                                    }
+                                    arr[j+1] = key;
+                                }
+                            }
+                            int main()
+                            {
+                                int n = 0, m = 0;
+                                float sup = 0.0;
+                                cin >> n >> m >> sup;
+                                int **trans = nullptr;
+                                int *iTemCnt = nullptr;
+                                setTransactions(trans, iTemCnt, m);
+                                int item = 0;
+                                cin >> item;
+                                int *buy = new int[item];
+                                for (int i = 0;i < item;i++)
+                                {
+                                    cin >> buy[i];
+                                }
+                                int cnt[20001] = {};
+                                for(int i = 0; i < m; i++)
+                                {
+                                    bool has[n+1];
+                                    for(int j = 0; j <= n; j++)
+                                    {
+                                        has[j] = false;
+                                    }
+                                    for(int j = 0; j < iTemCnt[i]; j++)
+                                    {
+                                        has[trans[i][j]] = true;
+                                    }
+                                    bool flag = true;
+                                    for(int j = 0; j < item; j++)
+                                    {
+                                        if(has[buy[j]] == false)
+                                        {
+                                            flag = false;
+                                            break;
+                                        }
+                                    }
+                                    if(!flag)
+                                    {
+                                        continue;
+                                    }
+                                    for(int j = 0; j < n; j++)
+                                    {
+                                        if(has[j])
+                                        {
+                                            cnt[j]++;
+                                        }
+                                    }
+                                }
+                                int rec = -1;
+                                float max_sup = -100000.0;
+                                for(int i = 0; i < n; i++)
+                                {
+                                    bool flag = true;
+                                    for(int j = 0; j < item; j++)
+                                    {
+                                        if(buy[j] == i)
+                                        {
+                                            flag = false;
+                                            break;
+                                        }
+                                    }
+                                    if(!flag)
+                                    {
+                                        continue;
+                                    }
+                                    if((float)cnt[i] / (float)m >= sup)
+                                    {
+                                        if((float)cnt[i] / (float)m > max_sup)
+                                        {
+                                            rec = i;
+                                            max_sup = (float)cnt[i] / (float)m;
+                                        }
+                                    }
+                                }
+                                if(rec != -1)
+                                {
+                                    cout << rec << "," << cnt[rec] << "," << cnt[buy[0]];
+                                }
+                                releaseMemory(trans, iTemCnt, m);
+                                return 0;
+                            }
+                            void setTransactions(int**& trans, int*& itemCnt, int m)
+                            {
+                                trans = new int*[m];
+                                itemCnt = new int[m];
+                                 
+                                for(int i = 0; i < m; i++)
+                                {
+                                    cin >> itemCnt[i];
+                                    trans[i] = new int[itemCnt[i]];
+                                     
+                                    for(int j = 0; j < itemCnt[i]; j++)
+                                        cin >> trans[i][j];
+                                }
+                            }
+                             
+                            void releaseMemory(int** neighbors, int* degrees, int m)
+                            {
+                                for(int i = 0; i < m; i++)
+                                    delete [] neighbors[i];
+                                delete [] neighbors;
+                                delete [] degrees;
+                            }
+            </pre>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6 text-center ftco-animate">
+                    <p><a href="docs/Recommender system.cpp" target="_blank" download="Recommender system.cpp" class="btn btn-primary py-4 px-5">Download my C++ code</a></p>
+                </div>
+            </div>
+        </p>
+    </div>
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About</h2>
+                        <p>A boy studies in Taipei from the countryside.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="https://www.facebook.com/profile.php?id=100006214337268" target="_blank"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/chihong_j/" target="_blank"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#home-section"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+                            <li><a href="#about-section"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
+                            <li><a href="#services-section"><span class="icon-long-arrow-right mr-2"></span>My code</a></li>
+                            <li><a href="#projects-section"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
+                            <li><a href="#contact-section"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Projects</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="https://drive.google.com/file/d/1niJzs4Ku-Xamkj2huc6jGfF0S8y55Jsy/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>IT solution to a company</a></li>
+                            <li><a href="https://drive.google.com/file/d/1s_guObnlAwX7QdKa1_c3q3Y3jMXQ7ZO_/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>Digital Transformation Case</a></li>
+                            <li><a href="https://drive.google.com/file/d/14VSzAMwlTXdfdAT5tO-ynDGSyWFgC-TZ/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>RPG project</a></li>
+                            <li><a href="https://drive.google.com/file/d/1scSYOuxgOLH1bG2mIWW1PoPI4BJOnJX6/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>statistics of Eslite Bookstore</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Any Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">NTU</span></li>
+                                <li><a href="tel://0988362533"><span class="icon icon-phone"></span><span class="text">+0988 362 533</span></a></li>
+                                <li><a href="mailto:B07701222@ntu.edu.tw"><span class="icon icon-envelope"></span><span class="text">B07701222@ntu.edu.tw</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chi-Hung, Chuang's personal page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Chi-Hung, Chuang</a>
+            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+              </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top:120px;">
+        <h2 style="font-weight=bold; color: rgb(209, 151, 26);">Kruskal's algorithm</h2>
+        <p>
+            給定一個加權無向圖，請找出一個「滿足一個特殊限制」（後面會說明）的最小生成樹（minimum cost spanning tree）。加權無向圖範例如下：
+            <br>
+            <br>
+            <img src="images/p1-1.png" class="img-fluid" alt="Responsive image">
+            <br>
+            <br> 我們也可以使用一個鄰接矩陣（adjacency matrix）
+            <br>
+            <br>
+            <img src="images/p1-2.png" class="img-fluid" alt="Responsive image">
+            <br><br> 來表示此一加權無向圖。
+            <br>
+            <br>在實做 Kruskal's algorithm 去求得最小生成樹時，有以下兩點請注意：
+            <br>
+            <br> 1. 若有兩條邊 [i,j] 和 [u,v] 的權重相同，請先挑 i+j 和 u+v 中較小的，若仍相同，請先挑 min{i,j} 和 min{u,v} 中較小的。舉例來說，若 [1,5] 和 [2,4] 的權重相同，由於 1+5 和 2+4 也相同，先選擇 min{1,5} 和 min{2,4} 中較小的，也就是 [1,5]。
+
+            <br><br>2. 在此最小生成樹上，每一個點的分支度（degree）必須小於等於 t，也就是一個點不能和超過 t 個點連接。以原圖為例，點 4 的分支度為 4，因為他與點 1、點 2、點 3、點 5 相連。因此在演算法挑選一個邊的時候，不僅要檢查該邊是否會造成迴路，也要檢查該邊是否會使一個點在最小生成樹上有高於 t 的分支度，任一項成立就要略過這個邊不挑。
+            <br>
+            <br>
+            <br>
+            <h3>Input :</h3>
+            <br> 每個檔案中會有 m+1 列，第一列含有 3 個正整數，第一個正整數為 n，表示此圖中共有幾個點，第二個正整數為 m，表示此圖共有多少條邊，第三個正整數為 t，表示最小生成樹中每個點的分支度上限。
+            <br> 第二到第 m+1 列皆各含有三個正整數，第二列存有 i(1)、j(1)、w(i1),j(1)，第三列存有 i(2)、j(2)、w(i2),j(2)，依此類推直到i(m)、j(m)、w(im),j(m)。已知 2≤n≤500、1≤m≤500、1≤w≤100、2≤t≤10，且點的編號皆為介於 1 和 n（包含 1 和 n）的正整數。
+            <br>
+            <br>
+            <br>
+            <h3>Output :</h3>
+            <br>讀入這些資訊後，請依上述規則計算並輸出，其中第一行請輸出一個數字，表示此最小生成樹的總重。第二行請按照選擇的順序依序輸出每一條被選擇的邊，每一條邊的兩個數字請以逗號隔開，不同邊請以分號隔開，且針對每一條邊請先輸出編號較小的點再輸出較大的點 (顯然地，我們會輸出 n−1 條邊)。
+            <br>
+            <br>
+            <br>
+            <h3>Sample Input :</h3>
+            <br>#sample 1
+            <br>7 &nbsp;10&nbsp; 3
+            <br>1 &nbsp;2&nbsp; 6
+            <br>1 &nbsp;3&nbsp; 4
+            <br>1 &nbsp;4 &nbsp;10
+            <br>2 &nbsp;4&nbsp; 2
+            <br>3 &nbsp;4&nbsp; 3
+            <br>3 &nbsp;5 &nbsp;5
+            <br>4 &nbsp;5&nbsp; 4
+            <br>5 &nbsp;6&nbsp; 7
+            <br>5 &nbsp;7&nbsp; 4
+            <br>6 &nbsp;7&nbsp; 2
+            <br>
+            <br> #sample 2
+            <br>6 &nbsp;8 &nbsp;2
+            <br>1 &nbsp;2&nbsp; 4
+            <br>1 &nbsp;6&nbsp; 6
+            <br>2 &nbsp;3&nbsp; 3
+            <br>3 &nbsp;4&nbsp; 4
+            <br>3 &nbsp;5 &nbsp;9
+            <br>3 &nbsp;6&nbsp; 2
+            <br>4 &nbsp;5&nbsp; 3
+            <br>5 &nbsp;6&nbsp; 5
+            <br>
+            <br>
+            <br>
+            <h3>Sample Output :</h3>
+            <br>#sample 1
+            <br>19
+            <br>2 , 4; 6 , 7; 3 , 4; 1 , 3; 4 , 5; 5 , 7
+            <br>
+            <br> #sample 2
+            <br> 17
+            <br> 3 , 6; 2 , 3; 4 , 5; 1 , 2; 5 , 6
+            <br>
+            <br>
+            <br>
+            <h3>C++ code :</h3>
+            <pre style="color :white;">
+                            #include < iostream >
+                            using namespace std;
+                            bool cycle(int c[][500], int);
+                            bool tlimit(int u[][500], int, int);
+                            int min(int, int);
+                            int main ()
+                            {
+                                int n, m, t, aa[500][3], a[500][500], b[500][500] = {0}, output[12000] = {0};
+                                cin >> n >> m >> t;
+                                for (int i = 0;i <= n;i++)
+                                {
+                                    for (int j = 0;j <= n;j++)
+                                    {
+                                        a[i][j] = 101;
+                                    }
+                            
+                                }
+                                for (int i = 0;i < m;i++)
+                                {
+                                    for (int j = 0;j < 3;j++)
+                                    {
+                                        cin >> aa[i][j]; 
+                                    }
+                                }
+                                for (int i = 0;i < m;i++)
+                                {
+                                    int xx = aa[i][0];
+                                    int yy = aa[i][1];
+                                    a[xx][yy] = aa[i][2];
+                                    a[yy][xx] = aa[i][2];
+                                }
+                                int minn = 101, num = 0, dis = 0;
+                                int x = 501, y = 501;
+                                for(int l = 1;l <= n-1;l++)
+                                {
+                                    for (int i = 1;i <= n;i++)
+                                    {
+                                        for (int j = i;j <= n;j++)
+                                        {
+                                            if (a[i][j] < minn)
+                                            {
+                                                minn = a[i][j];
+                                                x = i;
+                                                y = j;
+                                            }
+                                            if (a[i][j] == minn)
+                                            {
+                                                if (i + j < x + y)
+                                                {
+                                                    minn = a[i][j];
+                                                    x = i;
+                                                    y = j;
+                                                }
+                                                else if (i + j == x + y)
+                                                {
+                                                    int sm1, sm2;
+                                                    sm1 = min(i,j);
+                                                    sm2 = min(x,y);	
+                                                    int smallest = min(sm1, sm2);
+                                                    if (smallest == i)
+                                                    {
+                                                        minn = a[i][j];
+                                                        x = i;
+                                                        y = j;
+                                                    }
+                                                    if (smallest == j)
+                                                    {
+                                                        minn = a[i][j];
+                                                        x = i;
+                                                        y = j;
+                                                    }								
+                                                }								
+                                            }
+                                        }	
+                                    }
+                                b[x][y] = 1;
+                                b[y][x] = 1;
+                                if (cycle(b, n) == true || tlimit(b, n, t) == true)
+                                {
+                                    b[x][y] = 0;
+                                    b[y][x] = 0;
+                                    l--;
+                                    a[x][y] = 101;
+                                    a[y][x] = 101;
+                                }
+                                else
+                                { 
+                                    dis += minn;
+                                    output[num] = x;
+                                    num++;
+                                    output[num] = y;
+                                    num++;
+                                    a[x][y] = 101;
+                                }
+                                minn = 101;
+                                x = 501;
+                                y = 501;
+                                }
+                                cout << dis << endl;
+                                for (int i = 0;i < 2*(n-1);i++)
+                                {
+                                    cout << output[i] << ",";
+                                    i++;
+                                    cout << output[i];
+                                    if (i != 2*(n-1)-1)
+                                    {
+                                        cout << ";";	
+                                    } 
+                                }
+                            }
+                            bool cycle(int c[][500], int n)
+                            {
+                                int **g;
+                                g = new int *[n+1];
+                                for(int i = 0;i < n+1;i++)
+                                {
+                                    g[i] = new int[n+1];
+                                }
+                                for (int i = 1;i <= n;i++)
+                                {
+                                    for (int j = 1;j <= n;j++)
+                                    {
+                                        g[i][j] = c[i][j];
+                                    }
+                                }
+                                int d[501] = {0};
+                                for(int i = 1; i <= n; i++)
+                                {
+                                    for(int j = 1; j <= n; j++)
+                                    {
+                                        if(g[i][j] == 1)
+                                            d[i]++;
+                                    }
+                                }
+                                
+                                int d1 = 0;
+                                for(int i = 1; i <= n; i++)
+                                    if(d[i] == 1)
+                                    d1++;
+                              
+                                while(d1 != 0)
+                                {
+                                    for(int i = 1; i <= n; i++)
+                                    {
+                                        for(int j = 1; j <= n; j++)
+                                          {
+                                               if(d[i] == 1 && g[i][j] == 1)
+                                            {
+                                                  g[i][j] = 0;
+                                                  g[j][i] = 0;
+                                                  d[i]--;
+                                                  d[j]--;
+                                            }
+                                          }
+                                    }
+                                
+                                d1 = 0;
+                                for(int i = 1; i <= n; i++)
+                                      if(d[i] == 1)
+                                        d1++;
+                                  }
+                            
+                                  int d2 = 0;
+                                  for(int i = 1; i <= n; i++)
+                                       if(d[i] >= 2)
+                                      d2++;
+                              
+                                  if(d2 >= 3)
+                                    return true;
+                                  return false;
+                                  for(int i = 0;i < n+1;i++)
+                                  {
+                                      delete [] g[i];
+                                }
+                                delete [] g;
+                            }
+                            int min(int a, int b)
+                            {
+                                if (a < b)
+                                    return a;
+                                else
+                                    return b;
+                            }
+                            bool tlimit(int u[][500], int n, int t)
+                            {
+                                int d[501] = {0};
+                                for(int i = 1; i <= n; i++)
+                                {
+                                    for(int j = 1; j <= n; j++)
+                                    {
+                                        if(u[i][j] == 1)
+                                        d[i]++;
+                                    }
+                                }
+                                for(int i = 1; i <= n; i++)
+                                {
+                                    if (d[i] > t)
+                                        return true;
+                                }
+                                return false;
+                            }
+            </pre>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6 text-center ftco-animate">
+                    <p><a href="docs/Kruskal's algorithm.cpp" target="_blank" download="Kruskal's algorithm.cpp" class="btn btn-primary py-4 px-5">Download my C++ code</a></p>
+                </div>
+            </div>
+        </p>
+    </div>
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About</h2>
+                        <p>A boy studies in Taipei from the countryside.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="https://www.facebook.com/profile.php?id=100006214337268" target="_blank"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/chihong_j/" target="_blank"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#home-section"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+                            <li><a href="#about-section"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
+                            <li><a href="#services-section"><span class="icon-long-arrow-right mr-2"></span>My code</a></li>
+                            <li><a href="#projects-section"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
+                            <li><a href="#contact-section"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Projects</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="https://drive.google.com/file/d/1niJzs4Ku-Xamkj2huc6jGfF0S8y55Jsy/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>IT solution to a company</a></li>
+                            <li><a href="https://drive.google.com/file/d/1s_guObnlAwX7QdKa1_c3q3Y3jMXQ7ZO_/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>Digital Transformation Case</a></li>
+                            <li><a href="https://drive.google.com/file/d/14VSzAMwlTXdfdAT5tO-ynDGSyWFgC-TZ/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>RPG project</a></li>
+                            <li><a href="https://drive.google.com/file/d/1scSYOuxgOLH1bG2mIWW1PoPI4BJOnJX6/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>statistics of Eslite Bookstore</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Any Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">NTU</span></li>
+                                <li><a href="tel://0988362533"><span class="icon icon-phone"></span><span class="text">+0988 362 533</span></a></li>
+                                <li><a href="mailto:B07701222@ntu.edu.tw"><span class="icon icon-envelope"></span><span class="text">B07701222@ntu.edu.tw</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

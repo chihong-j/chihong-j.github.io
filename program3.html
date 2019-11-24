@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chi-Hung, Chuang's personal page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Chi-Hung, Chuang</a>
+            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+              </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top:120px;">
+        <h2 style="font-weight=bold; color: rgb(209, 151, 26);">Minimum Cost Design</h2>
+        <p>
+            某工廠想替產品的生產線進行產能規劃，以減少生產成本。我們假設目前工廠只有一條生產線，此生產線由若干個工作站組成，每一個工作站中各有若干台機台。舉例來說，假設此生產線由 2 個工作站組成，則採購原料進來之後，要將原料投入工作站 1，得到工作站 1 產出的在製品（work-in-progress，WIP），再將工作站 1 產出的在製品投入工作站 2，得到完成品（最終產品）。在本專案中，我們希望透過生產方案規劃，在確保最終產品數量滿足當日需求量，平衡每一站的生產量、存貨量與使用量，同時也控制每站每日的生產量不得超過產能上限的條件下，根據輸入的資訊，規劃最佳生產方案。
+            <br>
+            <br> 假設目前工廠只有一條生產線，此生產線由 I 個工作站組成，每一個工作站中各有 M( i ) 台機台。針對每一個工作站，我們假設工作站內的機台具有同質性，也就是說，不同工作站之間雖有不同的機台，但單一工作站內的機台都是相同的。
+            <br> 在工作站 i 中每開一個機台進行生產，都必須付出一定的開機成本 CON( i )；開機後，一台機台每生產一公斤產品的生產成本為 CD( i ) 元，且一台機台每日的產能上限為 B( i ) 公斤，代表機台一天最多能產出 B( i ) 公斤的產品；在製造過程中，當日投入原料當日就能通過所有個工作站並產出完成品。各工作站的產品製成率為 R( i )，製成率 R( i ) 定義為投入 R( i ) 公斤的原料會得到一公斤的產出，且 R( i ) 為 1 到 5 之間的正整數。
+            <br>
+            <br> 若工作站的產品成為存貨，每日每公斤的存貨成本則為 C( S )( i ) 元，由於除了工作站 1 至工作站 I 的產品有庫存成本，原料購入後也有儲存幾日再投入工作站 1 生產的可能，我們可以把原料倉庫當作工作站 0，因此庫存成本共會有 I + 1項。另外，在規劃的第一天，每站皆有可能會有一些初始存貨 S( i )（以公斤計算），初始存貨皆可投入生產，同理，初始存貨也會有 I + 1 項。
+            <br>
+            <br> 已知需規劃的生產時段共有 T 天，規劃的目標為，在每日生產的最終產品數量（也就是生產線最後一個工作站的生產量）滿足當天需求量 Dt（以公斤計算）的條件下，找出能最小化總成本的最佳生產方案。
+            <br> 總成本除上段中提到的開機成本 CON( i )、單位生產成本 C( D )( i ) 和存貨成本 C( S )( i ) 外，顯然也必須包含原料成本，我們假設每日原料成本可能不同，以每公斤 P( t ) 元表示。
+            <br> 在最佳生產方案中，必須規劃工廠工作站 1 至工作站 I 的每日生產量 x( i )( t )（定義為該工作站的產出量而非投入量，以公斤計算）以及每日機台開機數 n( i )( t )。此外，也必須規劃每日原料採購量 w( t )（以公斤計算），
+            <br>
+            <br>規劃中，首先必須確保最終產品數量滿足當日需求量，也必須平衡每一站的生產量、存貨量與使用量，同時也須控制每站每日的生產量不得超過產能上限（受到你決定的開機數量影響）。請根據輸入的資訊，規劃最佳生產方案。
+            <br>我們必須自行設計一個演算法使得成本能夠最小
+
+            <br>
+            <br>
+            <h3>Input :</h3>
+            <br> 第一行包含兩個整數 I 和 T。
+            <br> 第二行至第六行皆包含 I 個整數，第二行依序為 M( 1 )、M( 2 ) 直到 M( I )，
+            <br> 第三行依序為 CON(　1　)、CON( 2 ) 直到 CON( I )
+            <br> 第四行依序為 CD( 1 )、CD( 2 ) 直到 CD( I )，
+            <br>第五行依序為 B( 1 )、B( 2 ) 直到 B( I )，
+            <br>第六行依序為 R( 1 )、R( 2 ) 直到 R( I )。
+            <br>第七行與第八行皆包含 I + 1 個整數，第七行依序為 C( S )( 0 )、C( S )( I ) 直到 C( S )( I )，第八行依序為 S( 0 )、S( 1 ) 直到 S( I )。
+            <br>第九行及第十行皆包含 T 個整數，
+            <br>第九行依序為 D( 1 )、D( 2 ) 直到 D( T )，
+            <br>第十行依序為 P( 1 )、P( 2 ) 直到 P( T )。
+            <br><br>以上每一行中，兩兩整數之間皆被一個空白隔開。
+            <br>已知 1 ≤ I ≤ 100、1 ≤ T ≤ 1000、1 ≤ M( i ) ≤ 100、1 ≤ CON( i ) ≤ 1000、1 ≤ C( D )( i ) ≤ 1000、1 ≤ B( i ) ≤ 10000、1 ≤ R( i ) ≤ 5、1 ≤ C( S )( i ) ≤ 1000、1 ≤ S( i ) ≤ 10000、1 ≤ D( t ) ≤ 10000、1 ≤ P( t ) ≤ 10000。
+            <br><br>
+            <h3>Output :</h3>
+            <br>讀入資料後，請先用 I 行輸出一個 I×T 的矩陣代表 n( i )( t )，
+            <br>接著再用 I 行輸出一個 I × T 的矩陣代表 x( i )( t )，
+            <br>最後再用一行輸出 T 個數字代表 w( t )。
+            <br>在第 1 到第 I 行中，第 i 行依序為 n( i ),1、n( i ),2 直到 n( i )( t )。
+            <br>在第 I + 1 到第 2( I ) 行中，第 I + i 行依序為 x( i ),1、x( i ),2 直到 x( i )( t )。
+            <br>在第 2I + 1 行中，依序為 w( 1 )、w( 2 ) 直到 w( t )。
+            <br>每一行中皆有 T 個數字，兩數字間以一個空白隔開。
+            <br>
+
+            <br>
+            <br>
+            <h3>C++ code :</h3>
+            <pre style="color :white;">
+                            #include < iostream >
+                                using namespace std;
+                                
+                                int calculateMaxFinProduct(int nWorkStation, int* machines, int* productivities, int* productionRates);
+                                void determineProduction(int nWorkStation, int curDay, int FinProductAmount,
+                                int** productions, int* productionRates, int** inventories);
+                                void determinePurAmount(int curDay, int* purAmounts, int WSOneProduction, int WSOneRate, int** inventories);
+                                void determineOpenMachine(int nWorkStation, int curDay, int** inventories,
+                                int** productions, int* productivities, int** openMachines);
+                                void calculateInventory(int nWorkStation, int curDay, int curDemand, int curPurAmount,
+                                int** inventories, int** productions, int* productionRates);
+                                
+                                int main()
+                                {
+                                    // input data: lines 1 to 2
+                                    int nWorkStation = 0, nDay = 0;
+                                    cin >> nWorkStation >> nDay;
+                                
+                                    // input data: lines 3 to 8
+                                    // the length of each array is nWorkStation + 1, for work station 0, 1, 2, ..., n
+                                    // work station 0 is only for the purpose of storing raw material
+                                    int* machines = new int[nWorkStation + 1];
+                                    int* openCosts = new int[nWorkStation + 1];
+                                    int* produceCosts = new int[nWorkStation + 1];
+                                    int* productivities = new int[nWorkStation + 1];
+                                    int* productionRates = new int[nWorkStation + 1];
+                                    int* inventoryCosts = new int[nWorkStation + 1];
+                                    // inventories[i][j] is the inventory of work station i at j-th day
+                                    int** inventories = new int*[nWorkStation + 1];
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        inventories[i] = new int[nDay + 1];
+                                
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        cin >> machines[i];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        cin >> openCosts[i];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        cin >> produceCosts[i];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        cin >> productivities[i];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        cin >> productionRates[i];
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        cin >> inventoryCosts[i];
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        cin >> inventories[i][0];
+                                
+                                    // input data: lines 9 to 10
+                                    // the length of each array is nDay, for day 0, 1, 2, ..., n
+                                    int* demands = new int[nDay + 1];
+                                    int* purPrices = new int[nDay + 1];
+                                
+                                    for(int i = 1; i <= nDay; i++)
+                                        cin >> demands[i];
+                                    for(int i = 1; i <= nDay; i++) 
+                                        cin >> purPrices[i];
+                                
+                                    // there is no corresponding values for work station 0 or day 0
+                                    machines[0] = 0;
+                                    openCosts[0] = 0;
+                                    produceCosts[0] = 0;
+                                    productivities[0] = 0;
+                                    productionRates[0] = 0;
+                                    demands[0] = 0;
+                                    purPrices[0] = 0;
+                                
+                                    // data that will be filled in by the algorithm
+                                    int* purAmounts = new int[nDay + 1];
+                                    // openMachines[i][j] is amount of machines opened for work station i at j-th day
+                                    int** openMachines = new int*[nWorkStation + 1];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        openMachines[i] = new int[nDay + 1];
+                                    // productions[i][j] is the production plan for work station i at j-th day
+                                    int** productions = new int*[nWorkStation + 1];
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        productions[i] = new int[nDay + 1];
+                                
+                                    // there is no corresponding values for work station 0 or day 0
+                                    purAmounts[0] = 0;
+                                    openMachines[0] = nullptr;
+                                    productions[0] = nullptr;
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        openMachines[i][0] = 0;
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                        productions[i][0] = 0;
+                                
+                                
+                                
+                                    // a better algorithm ver.2 
+                                    // the inventory for every work station at every day will be considered in this algorithm
+                                    for(int i = 1; i <= nDay; i++)
+                                    { 
+                                        // for every day, the following 5 steps will be conducted:
+                                        // 1. determine the amount of finished product that will be produced
+                                        // 2. call function determineProduction and put the results in "productions"
+                                        // 3. call function determinePurAmount and put the results in "purAmounts"
+                                        // 4. call function determineOpenMachine and put the results in "openMachines"
+                                        // 5. calculate the inventory for every work station, and put the results in "inventories"
+                                        //  - productions[i][j] is the is the production plan for work station i at j-th day
+                                        //  - purAmounts[i] is the purchase amounts of raw material for the i-th day
+                                        //  - openMachines[i][j] is the amount of machines opened for work station i at j-th day
+                                        //  - inventories[i][j] is the inventory of work station i at j-th day
+                                        int curFinishedProduct = demands[i] - inventories[nWorkStation][i - 1];
+                                        if(curFinishedProduct < 0)
+                                            curFinishedProduct = 0;
+                                    
+                                        determineProduction(nWorkStation, i, curFinishedProduct,productions, productionRates, inventories);
+                                        determinePurAmount(i, purAmounts, productions[1][i], productionRates[1], inventories);
+                                        determineOpenMachine(nWorkStation, i, inventories,productions, productivities, openMachines);
+                                        calculateInventory(nWorkStation, i, demands[i], purAmounts[i],inventories, productions, productionRates);
+                                    }
+                                
+                                    // output the production plan
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                    {
+                                        for(int j = 1; j <= nDay; j++)
+                                        {
+                                            cout << openMachines[i][j];
+                                            if(j != nDay)
+                                            cout << " ";
+                                        }
+                                        cout << "\n";
+                                    }
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                    {
+                                        for(int j = 1; j <= nDay; j++)
+                                        {
+                                            cout << productions[i][j];
+                                            if(j != nDay)
+                                                cout << " ";
+                                        }
+                                        cout << "\n";
+                                    }
+                                    for(int i = 1; i <= nDay; i++)
+                                    {
+                                        cout << purAmounts[i];
+                                        if(i != nDay)
+                                        cout << " ";
+                                    }
+                                
+                                    // release memory
+                                    delete [] machines;
+                                    delete [] openCosts;
+                                    delete [] produceCosts;
+                                    delete [] productivities;
+                                    delete [] productionRates;
+                                    delete [] inventoryCosts;
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        delete [] inventories[i];
+                                    delete [] inventories;
+                                    delete [] demands;
+                                    delete [] purPrices;
+                                    delete [] purAmounts;
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        delete [] openMachines[i];
+                                    delete [] openMachines;
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                        delete [] productions[i];
+                                    delete [] productions;
+                                
+                                    return 0;
+                                }
+                                
+                                // ==================================================
+                                int calculateMaxFinProduct(int nWorkStation, int* machines, int* productivities, int* productionRates)
+                                {
+                                    if(nWorkStation == 1)
+                                        return machines[1] * productivities[1];
+                                    int finishedProduct = machines[1] * productivities[1];
+                                    for(int i = 2; i <= nWorkStation; i++)
+                                    {
+                                        finishedProduct /= productionRates[i];
+                                        if(finishedProduct > machines[i] * productivities[i])
+                                        finishedProduct = machines[i] * productivities[i];
+                                    }
+                                    return finishedProduct;
+                                }
+                                
+                                void determineProduction(int nWorkStation, int curDay, int FinProductAmount,int** productions, int* productionRates, int** inventories)
+                                {
+                                    for(int i = nWorkStation; i >= 1; i--)
+                                    {
+                                        if(i == nWorkStation)
+                                            productions[i][curDay] = FinProductAmount;
+                                        else
+                                            productions[i][curDay] = productions[i + 1][curDay] * productionRates[i + 1]- inventories[i][curDay - 1];
+                                        // production may be negative after the above calculation
+                                        if(productions[i][curDay] < 0)
+                                            productions[i][curDay] = 0;
+                                        // cout << i << "'s production: " << productions[i][curDay] << "...\n";
+                                    }
+                                }
+                                
+                                void determinePurAmount(int curDay, int* purAmounts, int WSOneProduction, int WSOneRate, int** inventories)
+                                {
+                                    purAmounts[curDay] = WSOneProduction * WSOneRate - inventories[0][curDay - 1];
+                                    // purchase amount may be negative after the above calculation
+                                    if(purAmounts[curDay] < 0)
+                                        purAmounts[curDay] = 0;
+                                }
+                                
+                                void determineOpenMachine(int nWorkStation, int curDay, int** inventories,int** productions, int* productivities, int** openMachines)
+                                {
+                                    for(int i = 1; i <= nWorkStation; i++)
+                                    {
+                                        openMachines[i][curDay] = productions[i][curDay] / productivities[i];
+                                        if(productions[i][curDay] % productivities[i] != 0)
+                                            openMachines[i][curDay]++;
+                                    }
+                                }
+                                
+                                void calculateInventory(int nWorkStation, int curDay, int curDemand, int curPurAmount,int** inventories, int** productions, int* productionRates)
+                                {
+                                    for(int i = 0; i <= nWorkStation; i++)
+                                    {
+                                        // for work station 0
+                                        if(i == 0)
+                                            inventories[i][curDay] = inventories[i][curDay - 1] + curPurAmount- productions[i + 1][curDay] * productionRates[i + 1];
+                                        // for the last work station
+                                        else if(i == nWorkStation)
+                                            inventories[i][curDay] = inventories[i][curDay - 1] + productions[i][curDay] - curDemand;
+                                        else
+                                            inventories[i][curDay] = inventories[i][curDay - 1] + productions[i][curDay]- productions[i + 1][curDay] * productionRates[i + 1];
+                                    }
+                                }
+                    
+                    
+                    
+                    
+                                    
+            </pre>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6 text-center ftco-animate">
+                    <p><a href="docs/A Better Algorithm (ver.2).cpp" target="_blank" download="Kruskal's algorithm.cpp" class="btn btn-primary py-4 px-5">Download my C++ code</a></p>
+                </div>
+            </div>
+        </p>
+    </div>
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About</h2>
+                        <p>A boy studies in Taipei from the countryside.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="https://www.facebook.com/profile.php?id=100006214337268" target="_blank"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="https://www.instagram.com/chihong_j/" target="_blank"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#home-section"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
+                            <li><a href="#about-section"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
+                            <li><a href="#services-section"><span class="icon-long-arrow-right mr-2"></span>My code</a></li>
+                            <li><a href="#projects-section"><span class="icon-long-arrow-right mr-2"></span>Projects</a></li>
+                            <li><a href="#contact-section"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Projects</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="https://drive.google.com/file/d/1niJzs4Ku-Xamkj2huc6jGfF0S8y55Jsy/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>IT solution to a company</a></li>
+                            <li><a href="https://drive.google.com/file/d/1s_guObnlAwX7QdKa1_c3q3Y3jMXQ7ZO_/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>Digital Transformation Case</a></li>
+                            <li><a href="https://drive.google.com/file/d/14VSzAMwlTXdfdAT5tO-ynDGSyWFgC-TZ/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>RPG project</a></li>
+                            <li><a href="https://drive.google.com/file/d/1scSYOuxgOLH1bG2mIWW1PoPI4BJOnJX6/view?usp=sharing" target="_blank"><span class="icon-long-arrow-right mr-2"></span>statistics of Eslite Bookstore</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Any Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">NTU</span></li>
+                                <li><a href="tel://0988362533"><span class="icon icon-phone"></span><span class="text">+0988 362 533</span></a></li>
+                                <li><a href="mailto:B07701222@ntu.edu.tw"><span class="icon icon-envelope"></span><span class="text">B07701222@ntu.edu.tw</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
