@@ -1,4 +1,5 @@
 # 
+<
 模板網址: https://colorlib.com/wp/template/clark/
 把原始模板所有的圖片文字都改成我的東西
 整個網頁首次載入時，每當游標往下滑都有當下瀏覽的東西浮出來(游標下移到哪裡，就顯示到哪裡)
@@ -98,5 +99,5 @@ And below the block is a line(from bootstrap) that you can input any range.
 
 footer:
 
-All the things in the footer are links connected to other sections and also my fb and IG. 
+All the things in the footer are links connected to other sections and also my fb and IG. </p>
 
