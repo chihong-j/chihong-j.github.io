@@ -21,7 +21,7 @@ Resume
 
 My code
 
-這裡放了三個區塊可以連結到另外三個我自己另外開的html檔案，這三個檔案裡面的格式跟主頁的一樣(包括整體感以及下方的footer)，這裡比較特別的地方就是用了<pre>語法來完整呈現我的程式碼
+這裡放了三個區塊可以連結到另外三個我自己另外開的html檔案，這三個檔案裡面的格式跟主頁的一樣(包括整體感以及下方的footer)，這裡比較特別的地方就是用了(pre)語法來完整呈現我的程式碼
 
 Skills
 
@@ -73,7 +73,7 @@ Below this section is a button, you can download my document through it.
 My code:
 
 I open three additional html files. All these pages have the same framework as the index page.(including footer)
-The special part is that I use <pre> syntax to show my code completely.(It keeps all the break<br> and indentation<tab>)
+The special part is that I use (pre) syntax to show my code completely.(It keeps all the break<br> and indentation<tab>)
 
 Skills:
 
