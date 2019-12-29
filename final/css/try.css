@@ -2,6 +2,11 @@
     display: none;
 }
 
+body {
+    background-image: url(../img/img2.png);
+    background-size: cover;
+}
+
 #panel {
     margin: 0 auto;
     padding: 30px;
