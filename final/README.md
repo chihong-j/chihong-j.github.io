@@ -21,15 +21,17 @@
 整個todo list是一個ul，每一行都是一個li
 使用handlebars的技術來製作模板(需要下載handlebars的js檔，網址：https://handlebarsjs.com/ )，我的模板是todo list之中的一個li，長這個樣子
 
- <script id="todo-list-item-template" type="text/x-handlebars-template">
-         <li data-id="{{id}}" class="{{#if is_complete}}complete{{/if}}">
-             <div class="checkbox"></div>
-             <div class="content">{{content}}</div>
-             <div class="actions">
-                 <div class="delete">x</div>
-             </div>
-         </li>
- </script>
+<pre>
+  <script id="todo-list-item-template" type="text/x-handlebars-template">
+          <li data-id="{{id}}" class="{{#if is_complete}}complete{{/if}}">
+              <div class="checkbox"></div>
+              <div class="content">{{content}}</div>
+              <div class="actions">
+                  <div class="delete">x</div>
+              </div>
+          </li>
+  </script>
+ </pre>
 
 新增的時候，點一下最下面那行，就會focus，並且變成可編輯
 
